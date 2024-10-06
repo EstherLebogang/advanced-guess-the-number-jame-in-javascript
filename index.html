@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Guess the Number Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f0f0f0;
+        }
+        .game-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #guessInput {
+            width: 100px;
+            padding: 5px;
+        }
+        button {
+            margin: 10px;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #progressContainer {
+            width: 80%;
+            height: 20px;
+            background-color: #f0f0f0;
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #progressBar {
+            width: 0;
+            height: 100%;
+            background-color: #4CAF50;
+            transition: width 0.5s ease-in-out;
+        }
+        .shake {
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+        .message-animation {
+            animation: pop 0.3s;
+        }
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .animated {
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        #customRangeInputs {
+            display: none;
+            margin-top: 10px;
+        }
+        #customRangeInputs input {
+            width: 50px;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1 class="animated">Advanced Guess the Number Game</h1>
+        <p>Try to guess the number between <span id="range"></span>.</p>
+        <div>
+            <input type="radio" id="easy" name="difficulty" value="easy">
+            <label for="easy">Easy</label>
+            <input type="radio" id="medium" name="difficulty" value="medium" checked>
+            <label for="medium">Medium</label>
+            <input type="radio" id="hard" name="difficulty" value="hard">
+            <label for="hard">Hard</label>
+            <input type="radio" id="custom" name="difficulty" value="custom" onchange="toggleCustomRange()">
+            <label for="custom">Custom</label>
+        </div>
+        <div id="customRangeInputs">
+            <label for="minRange">Min:</label>
+            <input type="number" id="minRange" value="1">
+            <label for="maxRange">Max:</label>
+            <input type="number" id="maxRange" value="100">
+            <label for="maxAttempts">Attempts:</label>
+            <input type="number" id="maxAttempts" value="10">
+        </div>
+        <input type="number" id="guessInput" min="1" max="200" class="animated">
+        <button onclick="checkGuess()" id="guessButton" class="animated">Guess</button>
+        <button onclick="giveHint()" id="hintButton" class="animated">Hint</button>
+        <button onclick="resetGame()" class="animated">Reset Game</button>
+        <p id="message" class="animated"></p>
+        <div id="progressContainer" class="animated">
+            <div id="progressBar"></div>
+        </div>
+        <p class="animated">Attempts: <span id="attempts">0</span></p>
+        <p class="animated">Score: <span id="score">1000</span></p>
+        <div id="leaderboard" class="animated"></div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
